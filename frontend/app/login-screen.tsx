@@ -8,6 +8,16 @@ const LoginScreen = () => {
     const [loggedInUser, setLoggedInUser] = useState(null);
 
     const handleLogin = () => {
+        if (!username || !password) {
+            Alert.alert('Błąd', 'Nazwa użytkownika i hasło nie mogą być puste!');
+            return;
+        }
+
+        if (/[^a-zA-Z0-9]/.test(username) || /[^a-zA-Z0-9]/.test(password)) {
+            Alert.alert('Błąd', 'Nazwa użytkownika i hasło mogą zawierać tylko litery i cyfry!');
+            return;
+        }
+
         //const apiUrl = 'http://10.0.2.2:8000/user/login-vurnerable';
         const apiUrl = 'http://10.0.2.2:8000/user/login-secure';
         
