@@ -1,10 +1,11 @@
+import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-
-from user import router as user_router
+from product import router as product_router
+from fastapi.middleware.httpsredirect import HTTPSRedirectMiddleware
 
 app = FastAPI()
-
+app.add_middleware(HTTPSRedirectMiddleware)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -13,4 +14,4 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(user_router.router, prefix='/user', tags=['user'])
+app.include_router(product_router.router, prefix='/product', tags=['product'])
